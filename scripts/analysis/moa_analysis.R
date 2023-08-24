@@ -26,6 +26,7 @@
 # - som_model: The trained SOM model.
 # - som_cluster: The cluster assignments for the data points.
 # - som_model_code_class_cluster: The data combined with the SOM codes and cluster assignments.
+# - dbi_values: Davies-Bouldin Index values for each tested number of clusters.
 # ===============================================
 # Required packages: kohonen
 # If the package is not installed,
@@ -75,7 +76,7 @@ analyzeMoA <- function(data_path, grid_dim, rlen = 200) {
   som_model_code_class_cluster = som_model_code_class
   som_model_code_class_cluster$cluster = som_cluster[som_model_code_class$code_class]
   
-  return(list(som_model = som_model, som_cluster = som_cluster, som_model_code_class_cluster = som_model_code_class_cluster))
+  return(list(som_model = som_model, som_cluster = som_cluster, som_model_code_class_cluster = som_model_code_class_cluster, dbi_values = dbi))
 }
 
 
