@@ -11,8 +11,8 @@
 # them accordingly. The function preprocesses the data, trains a SOM, classifies the 
 # data points based on the SOM model, and determines the optimal number of clusters 
 # using the Davies-Bouldin Index (DBI).
-# 
-# To use this function, save the script as a .R file, 
+#
+# To use this function, save the script as a .R file,
 # and load it in your R session using the 'source' function,
 # for example: source("moa_analysis.R")
 # ===============================================
@@ -36,7 +36,7 @@
 # result <- analyzeMoA(data_path = "data.txt", grid_dim = c(5, 5), rlen = 150)
 # som_model <- result$som_model
 # -----------------------------------------------
-# Display the training process, 
+# Display the training process,
 # observe the trend of decreasing distance with iterations
 # to assess if the iterations are sufficient;
 # a stable trend towards the end is preferable.
@@ -48,7 +48,7 @@ analyzeMoA <- function(data_path, grid_dim, rlen = 200) {
   library(kohonen)
   
   # Read and preprocess the scoring matrix
-  data <- read.table(data_path, sep = '\t', header = T, row.names = 1)
+  data <- read.table(data_path, sep = "\t", header = T, row.names = 1)
   data_train_matrix <- as.matrix(t(scale(data)))
   
   # Train the SOM model
@@ -56,14 +56,14 @@ analyzeMoA <- function(data_path, grid_dim, rlen = 200) {
   som_model <- som(X = data_train_matrix, grid = grid, rlen = rlen)
   
   # Classify data points based on the SOM model
-  som_model_code_class = data.frame(name = rownames(data_train_matrix), code_class = som_model$unit.classif)
+  som_model_code_class <- data.frame(name = rownames(data_train_matrix), code_class = som_model$unit.classif)
   
   # Determine optimal clustering based on DBI
   mydata <- as.matrix(as.data.frame(som_model$codes))
   dbi <- vector()
   for (i in 2:11) {
-    k = kmeans(mydata, centers = i)$cluster
-    dbi[i-1] <- calDBI(mydata, k)
+    k <- kmeans(mydata, centers = i)$cluster
+    dbi[i - 1] <- calDBI(mydata, k)
   }
   
   # Find the number of clusters that gives the minimum DBI
@@ -73,8 +73,8 @@ analyzeMoA <- function(data_path, grid_dim, rlen = 200) {
   som_cluster <- cutree(hclust(dist(mydata)), optimal_clusters)
   
   # Assign the new classes based on the clustering
-  som_model_code_class_cluster = som_model_code_class
-  som_model_code_class_cluster$cluster = som_cluster[som_model_code_class$code_class]
+  som_model_code_class_cluster <- som_model_code_class
+  som_model_code_class_cluster$cluster <- som_cluster[som_model_code_class$code_class]
   
   return(list(som_model = som_model, som_cluster = som_cluster, som_model_code_class_cluster = som_model_code_class_cluster, dbi_values = dbi))
 }
