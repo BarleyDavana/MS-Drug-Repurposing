@@ -93,8 +93,8 @@ sampleRandomSeeds <- function(Seeds_TarDens, seedcount, Net_tars, iter = 100){
   random_des_df <- result
 
   # Write the result dataframe to a text file
-  write.table(random_des_df, paste("output_Files/", "Random_", iter,
-                                   "_Target_Density.txt", sep = ''),
+  write.table(random_des_df,
+              paste("Random_", iter, "_Target_Density.txt", sep = ''),
               quote = F, sep = "\t", row.names = F)
 
   # Return the calculation result
@@ -123,7 +123,7 @@ computeDistribution <- function(Des_Mat, Seeds_TarDens) {
   Des_Mat$pvalue <- pvalue
 
   # Write the updated 'Des_Mat' to a text file
-  write.table(Des_Mat, "output_Files/Des_Mat_Distribution.txt",
+  write.table(Des_Mat, "Des_Mat_Distribution.txt",
               quote = F, sep = "\t", row.names = F)
 
   # Return the calculation result
