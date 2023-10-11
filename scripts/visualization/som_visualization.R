@@ -31,7 +31,7 @@ dev.off()
 # Cluster codebook vectors using hierarchical clustering
 som_hc <- cutree(hclust(object.distances(som_model, "codes")), 5)
 add.cluster.boundaries(som_model, som_hc)
-bgcol <- c("#6e9ece", "#8d6ab8", "#4e9595", "#76ba80", "#EFC000")[som_cluster]
+bgcol <- c("#71A0CE", "#ACA4E2", "#52A950", "#76ba80", "#F4D166")[som_cluster]
 
 # Matrix plot after clustering
 pdf("som_cluster.pdf", width = 6, height = 4)
