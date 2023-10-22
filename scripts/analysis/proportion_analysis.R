@@ -30,7 +30,7 @@ analyzeProportion <- function(edge_module_file, net_tars_file) {
   net_tars <- read.table(net_tars_file, header = TRUE, sep = "\t")
 
   # Store module-specific target proportions
-  all_modules <- unique(edges$module)
+  all_modules <- sort(unique(edges$module))
   module_perc_targets <- numeric(length(all_modules))
 
   for (m in all_modules) {
