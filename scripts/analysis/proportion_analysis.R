@@ -18,7 +18,7 @@
 # which can be obtained using the 'mapTargets' function from the DTANetPerturbeR package.
 # ===============================================
 # Example usage:
-# tar_proportion <- analyzeProportion("edge_Module.txt", "Net_tars.txt")
+# tar_proportion <- analyzeProportion("edge_Module.txt", "Net_Tars.txt")
 # ===============================================
 
 analyzeProportion <- function(edge_module_file, net_tars_file) {
